@@ -22,6 +22,7 @@ def make_udp_server():
             sent = sock.sendto(data, address)
             print("send {} bytes to {}".format(sent, address))
 
+
 def make_udp_client():
     """make a echo udp client"""
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -30,6 +31,15 @@ def make_udp_client():
 
     try:
         print("sending message to server")
-        sent = sock.sendto()
+        sent = sock.sendto(message, server_address)
+
+        # receive response
+        print("waiting to receive...")
+        data, server = sock.recvfrom(4096)
+        print("received {!r}".format(data))
     finally:
-        pass
+        sock.close()
+
+
+if __name__ == '__main__':
+    make_udp_server()
