@@ -28,6 +28,7 @@ class Interface(object):
     __metaclass__ = InterfaceMeta
     file = "temp.txt"
 
+
 class UserInterface(Interface):
     file = "foo.txt"
 
