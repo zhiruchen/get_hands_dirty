@@ -5,6 +5,7 @@ https://zh.wikipedia.org/wiki/%E5%A0%86%E6%A0%88
 https://docs.python.org/2/tutorial/datastructures.html
 """
 
+
 class Stack(object):
     """栈是一种LIFO的线性数据结构"""
     def __init__(self):
