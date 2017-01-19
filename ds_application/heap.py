@@ -1,14 +1,17 @@
 # encoding: utf-8
 
+import random
+
 """
 二叉堆
+https://www.cs.cmu.edu/~adamchik/15-121/lectures/Binary%20Heaps/heaps.html
 """
 
 
 class Heap(object):
     """"""
     def __init__(self):
-        self._heaplist = []
+        self._heaplist = [0]
         self._currentsize = 0
 
     def insert(self, val):
@@ -32,7 +35,9 @@ class Heap(object):
         min_val = self._heaplist[1]
         self._heaplist[1] = self._heaplist[self._currentsize]
         self._currentsize -= 1
+        self._heaplist.pop()
         self.sift_down(1)
+        return min_val
 
     def sift_down(self, pos):
         while (pos * 2) <= self._currentsize:
@@ -60,3 +65,23 @@ class Heap(object):
         while pos > 0:
             self.sift_down(pos)
             pos -= 1
+
+
+def test_heap():
+    alist = [random.randint(1, 100) for _ in range(10)]
+    print alist
+    min_val = min(alist)
+    heap = Heap()
+    heap.build_heap(alist)
+    heap_min = heap.del_min()
+    print heap_min == min_val
+
+    data_list = []
+    heap = Heap()
+    for _ in range(10):
+        n = random.randint(1, 100)
+        data_list.append(n)
+        heap.insert(n)
+
+    print min(data_list)
+    print heap.del_min()
