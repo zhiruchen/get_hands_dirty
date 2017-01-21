@@ -23,7 +23,7 @@ class TreeNode(object):
 
 
 class BinarySearch(object):
-    def __init__(self, arg):
+    def __init__(self):
         self._root = None
         self._size = 0
 
@@ -54,3 +54,46 @@ class BinarySearch(object):
 
     def __setitem__(self, k ,v):
         self.put(k ,v)
+
+    def get(self, key):
+        if self._root:
+            res = self._get(key, self._root)
+            if res:
+                return res.val
+            else:
+                return None
+        else:
+            return None
+
+    def _get(self, key, current_node):
+        if not current_node:
+            return None
+
+        if key == current_node.key:
+            return current_node
+        elif key < current_node.key:
+            return self._get(key, current_node.left_child)
+        else:
+            return self._get(key, current_node.right_child)
+
+    def __getitem__(self, key):
+        return self.get(key)
+
+    def __contains__(self, key):
+        return self._get(key, self._root) is not None
+
+
+def test_bin_search():
+    bin_search = BinarySearch()
+    bin_search.put(1, 1)
+    bin_search.put(2, 2)
+    bin_search.put(3, 3)
+    bin_search.put(4, 4)
+
+    assert bin_search.get(1) == 1
+    assert bin_search.get(2) == 2
+    assert bin_search[3] == 3
+    assert bin_search[4] == 4
+    for n in range(1, 5):
+        if n in bin_search:
+            print "%s is in bin_search" % n
