@@ -3,19 +3,23 @@
 """
 图算法
 """
+from collections import OrderedDict
 
 
 class Vertex(object):
     """顶点"""
     def __init__(self, id):
         self._id = id
-        self._connect_to = {}
+        self._connect_to = OrderedDict()
 
     def add_neighbor(self, nbr, weight=0):
         self._connect_to[nbr] = weight
 
     def __unicode__(self):
         return u"%s connected to %s" (self._id, ''.join([x.id for x in self._connect_to]))
+
+    def __str__(self):
+        return u"%s connected to %s" % (self._id, ','.join([x.id for x in self._connect_to]))
 
     @property
     def id(self):
@@ -64,7 +68,7 @@ class Graph(object):
         return iter(self._vert_list.values())
 
 
-def test_graph():
+def build_graph():
     graph = Graph()
     for n in range(6):
         graph.add_vertext(n)
@@ -84,3 +88,5 @@ def test_graph():
     for v in graph:
         for w in v.get_connections():
             print "(%s->%s)" % (v.id, w.id)
+
+    return graph.get_vertex(0)
