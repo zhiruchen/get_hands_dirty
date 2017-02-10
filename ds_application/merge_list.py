@@ -1,5 +1,9 @@
 # encoding: utf-8
 
+"""
+对一个先递增后递减的列表排序
+"""
+
 
 def merge_list(data_list):
 	data_len = len(data_list)
@@ -11,7 +15,6 @@ def merge_list(data_list):
 			
 
 	incr_list, decre_list = data_list[:j], data_list[j:][::-1]
-	print incr_list, decre_list
 	m, n, k = 0, 0, 0
 
 	while m < len(incr_list) and n < len(decre_list):
