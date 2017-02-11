@@ -20,11 +20,11 @@ class Node(object):
         return self._next
 
     @next.setter
-    def next(self, next):
-        self._next = next
+    def next(self, next_p):
+        self._next = next_p
 
 
-class LinkedList(object)
+class LinkedList(object):
     def __init__(self):
         self._head = None
         self._size = 0
@@ -35,4 +35,3 @@ class LinkedList(object)
         self._head = temp
         self._size += 1
 
-    

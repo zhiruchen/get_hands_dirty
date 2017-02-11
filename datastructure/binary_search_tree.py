@@ -52,8 +52,8 @@ class BinarySearch(object):
             else:
                 current_node.right_child = TreeNode(key, val, parent=current_node)
 
-    def __setitem__(self, k ,v):
-        self.put(k ,v)
+    def __setitem__(self, k, v):
+        self.put(k, v)
 
     def get(self, key):
         if self._root:
