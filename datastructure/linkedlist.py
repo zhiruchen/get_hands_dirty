@@ -56,6 +56,24 @@ class LinkedList(object):
             self._head = self._head.next
             return temp_head.data
 
+    @staticmethod
+    def merge_two_list(node1, node2):
+        """merge two sorted linkedlist"""
+        if not node1:
+            return node1
+
+        if not node2:
+            return node2
+
+        if node1.data > node2.data:
+            temp = node2
+            temp.next = LinkedList.merge_two_list(node1, node2.next)
+            return temp
+        else:
+            temp = node1
+            temp.next = LinkedList.merge_two_list(node1.next, node2)
+            return temp
+
 
 def test_link_list():
     linked_list = LinkedList()
@@ -72,3 +90,18 @@ def test_link_list():
         linked_list._head = linked_list._head.next
     # for x in linked_list:
     #     print x
+
+
+def test_merge_two_list():
+    linked_list1 = LinkedList()
+    for n in range(5):
+        linked_list1.add(n)
+
+    linked_list2 = LinkedList()
+    for n in range(5, 10):
+        linked_list2.add(n)
+
+    final_head = LinkedList.merge_two_list(linked_list1._head, linked_list2._head)
+    while final_head:
+        print final_head.data
+        final_head = final_head.next

@@ -89,6 +89,34 @@ class BinTree(object):
         _mirror_tree(self._root)
 
 
+def is_subtree(t1_root, t2_root):
+    if not t2_root:
+        return True
+
+    if not t1_root:
+        return False
+
+    if t1_root.data != t2_root.data:
+        return False
+
+    return is_subtree(t1_root.left, t2_root.left) and is_subtree(t1_root.right, t2_root.right)
+
+
+def has_subtree(root1, root2):
+    result = False
+    if root1 and root2:
+        if root1.data == root2.data:
+            result = is_subtree(root1, root2)
+
+        if not result:
+            result = has_subtree(root1.left, root2)
+
+        if not result:
+            result = has_subtree(root1.right, root2)
+
+    return result
+
+
 def test_bin_tree():
     bin_tree = BinTree(TreeNode(1,
                                 left=TreeNode(2, left=TreeNode(3), right=None),
@@ -102,3 +130,13 @@ def test_bin_tree():
     # bin_tree.level_order()  # 1 2 4 3 5 6
     bin_tree.mirror_tree()
     bin_tree.pre_order()  # 1 4 6 5 2 3
+
+
+def test_has_subtree():
+    tree1 = BinTree(TreeNode(1,
+                                left=TreeNode(2, left=TreeNode(3), right=None),
+                                right=TreeNode(4, left=TreeNode(5), right=TreeNode(6))))
+    tree2 = BinTree(TreeNode(4, left=TreeNode(5), right=TreeNode(6)))
+
+    print tree1._root.data, tree2._root.data
+    print has_subtree(tree1._root, tree2._root)  # True
