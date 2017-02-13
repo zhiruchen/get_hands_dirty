@@ -18,3 +18,15 @@ def find_showed_half_length_num(array):
                 times = 1
 
     return current_num
+
+
+def max_sum(array):
+    """子数组的最大累加和"""
+    cur, max_val = 0, 0
+    for item in array:
+        cur += item
+        max_val = max(max_val, cur)
+        print cur, max_val
+        cur = 0 if cur < 0 else cur
+
+    return max_val
