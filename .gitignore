@@ -93,3 +93,5 @@ ENV/
 
 # macosx
 .DS_Store
+
+.vscode/
